@@ -119,10 +119,14 @@
 
 
     <p>
-        <div class="d-grid gap-2 d-md-block">
-            <button class="btn btn-outline-light" type="button">Microphone</button>
-            <button class="btn btn-outline-light" type="button">Audio File</button>
-          </div>
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <div class="d-grid gap-2 d-md-block">
+
+                <label for="audioFileUpload" class="btn btn-outline-light">Audio File</label>
+                <input id="audioFileUpload" type="file" name="audiofile" style="display: none;" onchange="this.form.submit()">
+                <button id="recordButton" class="btn btn-outline-light" type="button">Microphone</button>
+            </div>
+</form>
 
     </p>
     <div class="row align-items-md-stretch">
@@ -152,6 +156,52 @@
 </main>
 <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-    
+<script>
+let mediaRecorder;
+let audioChunks = [];
+let isRecording = false;
 
+const recordButton = document.getElementById("recordButton");
+const audioFileUpload = document.getElementById("audioFileUpload");
+
+recordButton.addEventListener("click", function () {
+    if (!isRecording) {
+        startRecording();
+        this.textContent = 'Stop Recording';
+        this.classList.remove('btn-outline-light');
+        this.classList.add('btn-outline-danger');
+    } else {
+        stopRecording();
+        this.textContent = 'Microphone';
+        this.classList.add('btn-outline-light');
+        this.classList.remove('btn-outline-danger');
+    }
+});
+
+function startRecording() {
+    isRecording = true;
+    navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+        audioChunks = [];
+        mediaRecorder.addEventListener("dataavailable", event => {
+            audioChunks.push(event.data);
+        });
+        mediaRecorder.addEventListener("stop", () => {
+            const audioBlob = new Blob(audioChunks);
+            const formData = new FormData();
+            formData.append("audiofile", audioBlob, "recording.mp3"); // change the file format if necessary
+            fetch("/upload", { method: "POST", body: formData }).then(response => {
+                console.log(response.status); // Handle response status
+            });
+        });
+    });
+}
+
+function stopRecording() {
+    isRecording = false;
+    mediaRecorder.stop();
+}
+</script>
 </body></html>
