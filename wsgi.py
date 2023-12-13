@@ -28,6 +28,16 @@ def correct_grammer(transcript):
     )
     return completion.choices[0].message.content
 
+
+def find_changed_words(original_text, corrected_text):
+    original_words = original_text.split()
+    corrected_words = corrected_text.split()
+
+    changed_words = [word for original, corrected in zip(original_words, corrected_words) if original != corrected]
+
+    return changed_words
+
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
