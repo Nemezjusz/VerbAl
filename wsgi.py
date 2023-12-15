@@ -23,7 +23,7 @@ def correct_grammer(transcript):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a grammar assistant, skilled in correcting grammar"},
-            {"role": "user", "content": f"Correct grammer in following text, return only corrected text: {transcript}"}
+            {"role": "user", "content": f"Correct grammar in following text, return only corrected text: {transcript}"}
         ]
     )
     return completion.choices[0].message.content
