@@ -13,7 +13,7 @@ python3 install_libs.py
 
 ### Whisper
 
-Na początku bedziemy potrzebować dodatkowej biblioteki do przetwarzania dźwięku ffmpeg
+Bedziemy potrzebować dodatkowej biblioteki do przetwarzania dźwięku ffmpeg
 ```
 # Linux
 sudo apt update && sudo apt install ffmpeg
@@ -27,6 +27,7 @@ chco install ffmpeg
 
 ### Ollama
 
+Do pełnej niezależności potrzebna nam także Ollama i pobrany za jej pomocą LLM
 ```
 # Linux
 curl https://ollama.ai/install.sh | sh
