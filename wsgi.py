@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import os, werkzeug, whisper, difflib
 from openai import OpenAI
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="")
 
 app = Flask(__name__)
 
@@ -41,7 +41,7 @@ def replace_with_bold(corrected_text, changed_words):
     c = 0
     for i in range(len(corrected_text)):
         if corrected_text[i] == changed_words[c]:
-            corrected_text[i] = f"<b style='color:red;'>{corrected_text[i]}<b/>"
+            corrected_text[i] = f"<b style='color:green;'>{corrected_text[i]}</b>"
             if c != len(changed_words)-1:
                 c+=1
 
