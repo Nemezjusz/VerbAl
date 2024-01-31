@@ -1,5 +1,8 @@
 # VerbAl
-Aplikacja do analizy języka mówionego i jego korekty gramatycznej stworzona przy pomocy aktualnie dostępnych modeli i narzędzi AI.
+Głównym celem projektu było stworzenie aplikacji, wykorzystując dostępne narzędzia AI. Aplikacja automatycznie transkrybuje dostarczony przez użytkownika 
+dźwięk za pomocą technologii speech-to-text. W kolejnym etapie następuje analiza i poprawa tekstu, wykorzystując np. ChatGPT w celu poprawy gramatyki i ogólnej składni.
+Ostatecznie aplikacja prezentuje wyniki, porównując tekst pierwotny z poprawionym, oraz oferuje sugestie dotyczące gramatyki.
+
 
 ## Funkcjonalności
 Aplikacja oferuje możliwość analizy dźwięku wprowadzonego za pomocą jednej z następujących możliwości:
